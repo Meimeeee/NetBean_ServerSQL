@@ -29,11 +29,12 @@ public class Main {
                 System.out.println("|     Book Management Menu      |");
                 System.out.println("+-------------------------------+");
                 System.out.println("| 1. Add Book                   |");
-                System.out.println("| 2. Remove Book by Title       |");
+                System.out.println("| 2. Remove                     |");
                 System.out.println("| 3. Update Book Information    |");
                 System.out.println("| 4. List All Books             |");
                 System.out.println("| 5. Search                     |");
                 System.out.println("| 6. View Book by ID            |");
+                System.out.println("| 7. Count total book           |");
                 System.out.println("| 0. Exit                       |");
                 System.out.println("+-------------------------------+");
                 System.out.print("Enter your choice: ");
@@ -127,6 +128,11 @@ public class Main {
                     case 6://show book by ID
                         bookManager.showBookByID();
                         break;
+                        
+                    case 7://show total book
+                        bookManager.totalBookCount();
+                        break;
+                        
                     case 0://Exit
                         System.out.println("Baibaiii");
                         System.exit(0);
