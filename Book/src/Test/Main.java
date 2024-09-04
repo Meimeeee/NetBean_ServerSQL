@@ -85,45 +85,49 @@ public class Main {
                         bookManager.showbook();
                         break;
 
-                    case 5://research by title
-                        boolean cho = true;
-                        while (cho) {
-                            System.out.println("+---------------------------+");
-                            System.out.println("|        Search Book        |");
-                            System.out.println("+---------------------------+");
-                            System.out.println("| 1. Search Books by Author |");
-                            System.out.println("| 2. Search Books by Genre  |");
-                            System.out.println("| 3. Search Books by Year   |");
-                            System.out.println("| 0. Exit                   |");
-                            System.out.println("+---------------------------+");
-                            System.out.print("Enter your choice: ");
-
-                            try {
-                                int search = sc.nextInt();
-                                sc.nextLine();
-                                switch (search) {
-                                    case 1:
-                                        bookManager.searchByAuthor();
-                                        break;
-                                    case 2:
-                                        bookManager.searchByGenre();
-                                        break;
-                                    case 3:
-                                        bookManager.searchByYear();
-                                        break;
-                                    case 0:
-                                        System.out.println("Baibaii");
-                                        cho = false;
-                                        break;
-                                    default:
-                                        System.out.println("Input 1..3 and 0 to exit");
-                                }
-                            } catch (InputMismatchException e) {
-                                System.out.println("Invalid search. Please try again");
-                                sc.nextLine();
-                            }
-                        }
-                        break;
+//                    case 5:// search by
+//                        boolean cho = true;
+//                        while (cho) {
+//                            System.out.println("+---------------------------+");
+//                            System.out.println("|        Search Book        |");
+//                            System.out.println("+---------------------------+");
+//                            System.out.println("| 1. Search Books by Author |");
+//                            System.out.println("| 2. Search Books by Genre  |");
+//                            System.out.println("| 3. Search Books by Year   |");
+//                            System.out.println("| 0. Exit                   |");
+//                            System.out.println("+---------------------------+");
+//                            System.out.print("Enter your choice: ");
+//
+//                            try {
+//                                int search = sc.nextInt();
+//                                sc.nextLine();
+//                                switch (search) {
+//                                    case 1:
+//                                        bookManager.searchByAuthor();
+//                                        break;
+//                                    case 2:
+//                                        bookManager.searchByGenre();
+//                                        break;
+//                                    case 3:
+//                                        bookManager.searchByYear();
+//                                        break;
+//                                    case 0:
+//                                        System.out.println("Baibaii");
+//                                        cho = false;
+//                                        break;
+//                                    default:
+//                                        System.out.println("Input 1..3 and 0 to exit");
+//                                }
+//                            } catch (InputMismatchException e) {
+//                                System.out.println("Invalid search. Please try again");
+//                                sc.nextLine();
+//                            }
+//                        }
+//                        break;
+                        
+                    case 5: // search
+                        bookManager.randomSearch();
+                        break; 
 
                     case 6://show book by ID
                         bookManager.showBookByID();

@@ -110,14 +110,18 @@ public class BookManager {
     //4
     public void showbook() throws SQLException {
         List<Book> books = listBook();
-        if(!books.isEmpty()){
+        if (!books.isEmpty()) {
+            System.out.printf("%-10s | %-20s | %-15s | %-15s | %-4s | %-10s | %-8s | %-8s%n",
+                    "ID", "Title", "Author", "Publisher", "Year", "Genre", "Quantity", "Price");
+            System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
             for (Book book : books) {
-            System.out.println(book);
-        }
+                System.out.println(book);
+                System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
+            }
         } else {
             System.out.println("EMPTY!!!!!!");
         }
-        
+
     }
 
     //2
@@ -190,19 +194,19 @@ public class BookManager {
         boolean found = false;
         while (rs.next()) {
             found = true;
-            System.out.println("Book Details:\n");
-            System.out.println("--------------------------------------------------\n");
-            System.out.println("| Field       | Value                            |\n");
-            System.out.println("--------------------------------------------------\n");
-            System.out.println("| Book ID     : " + rs.getString("id") + "\n");
-            System.out.println("| Title       : " + rs.getString("title") + "\n");
-            System.out.println("| Author      : " + rs.getString("author") + "\n");
-            System.out.println("| Publisher   : " + rs.getString("publisher") + "\n");
-            System.out.println("| Year        : " + rs.getInt("published_year") + "\n");
-            System.out.println("| Genre       : " + rs.getString("id") + "\n");
-            System.out.println("| Quantity    : " + rs.getInt("quantity") + "\n");
-            System.out.println("| Price       : " + rs.getFloat("price") + "\n");
-            System.out.println("--------------------------------------------------");
+            System.out.printf("%-10s | %-20s | %-15s | %-15s | %-4s | %-10s | %-8s | %-8s%n",
+                    "ID", "Title", "Author", "Publisher", "Year", "Genre", "Quantity", "Price");
+            System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
+
+            System.out.printf("%-10s | %-20s | %-15s | %-15s | %-4d | %-10s | %-8d | %-8.2f%n",
+                    rs.getString("id"),
+                    rs.getString("title"),
+                    rs.getString("author"),
+                    rs.getString("publisher"),
+                    rs.getInt("published_year"),
+                    rs.getString("genre"),
+                    rs.getInt("quantity"),
+                    rs.getFloat("price"));
         }
         if (!found) {
             System.out.println("Not found!!");
@@ -223,19 +227,19 @@ public class BookManager {
 
         while (rs.next()) {
             found = true;
-            System.out.println("Book Details:\n");
-            System.out.println("--------------------------------------------------\n");
-            System.out.println("| Field       | Value                            |\n");
-            System.out.println("--------------------------------------------------\n");
-            System.out.println("| Book ID     : " + rs.getString("id") + "\n");
-            System.out.println("| Title       : " + rs.getString("title") + "\n");
-            System.out.println("| Author      : " + rs.getString("author") + "\n");
-            System.out.println("| Publisher   : " + rs.getString("publisher") + "\n");
-            System.out.println("| Year        : " + rs.getInt("published_year") + "\n");
-            System.out.println("| Genre       : " + rs.getString("id") + "\n");
-            System.out.println("| Quantity    : " + rs.getInt("quantity") + "\n");
-            System.out.println("| Price       : " + rs.getFloat("price") + "\n");
-            System.out.println("--------------------------------------------------");
+            System.out.printf("%-10s | %-20s | %-15s | %-15s | %-4s | %-10s | %-8s | %-8s%n",
+                    "ID", "Title", "Author", "Publisher", "Year", "Genre", "Quantity", "Price");
+            System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
+
+            System.out.printf("%-10s | %-20s | %-15s | %-15s | %-4d | %-10s | %-8d | %-8.2f%n",
+                    rs.getString("id"),
+                    rs.getString("title"),
+                    rs.getString("author"),
+                    rs.getString("publisher"),
+                    rs.getInt("published_year"),
+                    rs.getString("genre"),
+                    rs.getInt("quantity"),
+                    rs.getFloat("price"));
         }
         if (!found) {
             System.out.println("Not found!!");
@@ -256,89 +260,128 @@ public class BookManager {
 
         while (rs.next()) {
             found = true;
-            System.out.println("Book Details:\n");
-            System.out.println("--------------------------------------------------\n");
-            System.out.println("| Field       | Value                            |\n");
-            System.out.println("--------------------------------------------------\n");
-            System.out.println("| Book ID     : " + rs.getString("id") + "\n");
-            System.out.println("| Title       : " + rs.getString("title") + "\n");
-            System.out.println("| Author      : " + rs.getString("author") + "\n");
-            System.out.println("| Publisher   : " + rs.getString("publisher") + "\n");
-            System.out.println("| Year        : " + rs.getInt("published_year") + "\n");
-            System.out.println("| Genre       : " + rs.getString("id") + "\n");
-            System.out.println("| Quantity    : " + rs.getInt("quantity") + "\n");
-            System.out.println("| Price       : " + rs.getFloat("price") + "\n");
-            System.out.println("--------------------------------------------------");
+            System.out.printf("%-10s | %-20s | %-15s | %-15s | %-4s | %-10s | %-8s | %-8s%n",
+                    "ID", "Title", "Author", "Publisher", "Year", "Genre", "Quantity", "Price");
+            System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
+
+            System.out.printf("%-10s | %-20s | %-15s | %-15s | %-4d | %-10s | %-8d | %-8.2f%n",
+                    rs.getString("id"),
+                    rs.getString("title"),
+                    rs.getString("author"),
+                    rs.getString("publisher"),
+                    rs.getInt("published_year"),
+                    rs.getString("genre"),
+                    rs.getInt("quantity"),
+                    rs.getFloat("price"));
         }
         if (!found) {
             System.out.println("Not found!!");
         }
     }
+
     //8.year
-    public void searchByYear() throws SQLException{
+    public void searchByYear() throws SQLException {
         Connection connection = JDBC_connection.getConnection();
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter year of book published: "); int year = sc.nextInt();
-        
+        System.out.print("Enter year of book published: ");
+        int year = sc.nextInt();
+
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM book WHERE published_year  = ?");
         ps.setInt(1, year);
         ResultSet rs = ps.executeQuery();
-        if(rs.next()){
-                System.out.println("Book Details:\n");
-                System.out.println("--------------------------------------------------\n");
-                System.out.println("| Field       | Value                            |\n");
-                System.out.println("--------------------------------------------------\n");
-                System.out.println("| Book ID     : " + rs.getString("id")+ "\n");
-                System.out.println("| Title       : " + rs.getString("title") + "\n");
-                System.out.println("| Author      : " + rs.getString("author") + "\n");
-                System.out.println("| Publisher   : " + rs.getString("publisher") + "\n");
-                System.out.println("| Year        : " + rs.getInt("published_year") + "\n");
-                System.out.println("| Genre       : " + rs.getString("id") + "\n");
-                System.out.println("| Quantity    : " + rs.getInt("quantity") + "\n");
-                System.out.println("| Price       : " + rs.getFloat("price") + "\n");
-                System.out.println("--------------------------------------------------");
+        if (rs.next()) {
+            System.out.printf("%-10s | %-20s | %-15s | %-15s | %-4s | %-10s | %-8s | %-8s%n",
+                    "ID", "Title", "Author", "Publisher", "Year", "Genre", "Quantity", "Price");
+            System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
+
+            System.out.printf("%-10s | %-20s | %-15s | %-15s | %-4d | %-10s | %-8d | %-8.2f%n",
+                    rs.getString("id"),
+                    rs.getString("title"),
+                    rs.getString("author"),
+                    rs.getString("publisher"),
+                    rs.getInt("published_year"),
+                    rs.getString("genre"),
+                    rs.getInt("quantity"),
+                    rs.getFloat("price"));
         } else {
             System.out.println("Not found!!");
         }
     }
-            
+
     //9.show book by ID
-    public void showBookByID() throws SQLException{
+    public void showBookByID() throws SQLException {
         Connection connection = JDBC_connection.getConnection();
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter book ID: "); String id = sc.nextLine();
-        
+        System.out.print("Enter book ID: ");
+        String id = sc.nextLine();
+
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM book WHERE id = ?");
         ps.setString(1, id);
         ResultSet rs = ps.executeQuery();
-        
-        if(rs.next()){////////////////////////////////////////////////////////////////////// hoặc dùng while
-                System.out.println("Book Details:\n");
-                System.out.println("--------------------------------------------------\n");
-                System.out.println("| Field       | Value                            |\n");
-                System.out.println("--------------------------------------------------\n");
-                System.out.println("| Book ID     : " + rs.getString("id")+ "\n");
-                System.out.println("| Title       : " + rs.getString("title") + "\n");
-                System.out.println("| Author      : " + rs.getString("author") + "\n");
-                System.out.println("| Publisher   : " + rs.getString("publisher") + "\n");
-                System.out.println("| Year        : " + rs.getInt("published_year") + "\n");
-                System.out.println("| Genre       : " + rs.getString("id") + "\n");
-                System.out.println("| Quantity    : " + rs.getInt("quantity") + "\n");
-                System.out.println("| Price       : " + rs.getFloat("price") + "\n");
-                System.out.println("--------------------------------------------------");
+
+        if (rs.next()) {////////////////////////////////////////////////////////////////////// hoặc dùng while
+            System.out.printf("%-10s | %-20s | %-15s | %-15s | %-4s | %-10s | %-8s | %-8s%n",
+                    "ID", "Title", "Author", "Publisher", "Year", "Genre", "Quantity", "Price");
+            System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
+
+            System.out.printf("%-10s | %-20s | %-15s | %-15s | %-4d | %-10s | %-8d | %-8.2f%n",
+                    rs.getString("id"),
+                    rs.getString("title"),
+                    rs.getString("author"),
+                    rs.getString("publisher"),
+                    rs.getInt("published_year"),
+                    rs.getString("genre"),
+                    rs.getInt("quantity"),
+                    rs.getFloat("price"));
         } else {
             System.out.println("No book founnd with ID: " + id);
         }
     }
+
     //hiển thị số lượng quyển sách trong DB
-    public void totalBookCount() throws SQLException{
+    public void totalBookCount() throws SQLException {
         Connection connection = JDBC_connection.getConnection();
         int totalBooks = 0;
         PreparedStatement ps = connection.prepareStatement("SELECT COUNT(*) AS total FROM book");
         ResultSet rs = ps.executeQuery();
-        if(rs.next()){
+        if (rs.next()) {
             System.out.println(rs.getInt("total"));
         }
-        
+
+    }
+
+    //tìm kiếm ngẫu nhiên 
+    public void randomSearch() {
+        Connection connection = JDBC_connection.getConnection();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("SEARCH: ");
+        String search = sc.nextLine();
+
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM book WHERE title LIKE ? OR author LIKE ? OR id LIKE ?");
+            ps.setString(1, "%" + search + "%");
+            ps.setString(2, "%" + search + "%");
+            ps.setString(3, "%" + search + "%");
+
+            ResultSet rs = ps.executeQuery();
+            System.out.printf("%-10s | %-20s | %-15s | %-15s | %-4s | %-10s | %-8s%n",
+                    "ID", "Title", "Author", "Publisher", "Year", "Genre", "Quantity");
+            System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
+
+            while (rs.next()) {
+                System.out.printf("%-10s | %-20s | %-15s | %-15s | %-4d | %-10s | %-8d%n",
+                        rs.getString("id"),
+                        rs.getString("title"),
+                        rs.getString("author"),
+                        rs.getString("publisher"),
+                        rs.getInt("published_year"),
+                        rs.getString("genre"),
+                        rs.getInt("quantity"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
     }
 }

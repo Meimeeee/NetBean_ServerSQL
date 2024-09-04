@@ -98,18 +98,23 @@ public class Book {
     @Override
     public String toString() {
 
-        return "Book Details:\n"
-                + "--------------------------------------------------\n"
-                + "| Field       | Value                            |\n"
-                + "--------------------------------------------------\n"
-                + "| Book ID     : " + bookId + "\n"
-                + "| Title       : " + title + "\n"
-                + "| Author      : " + author + "\n"
-                + "| Publisher   : " + publisher + "\n"
-                + "| Year        : " + year + "\n"
-                + "| Genre       : " + genre + "\n"
-                + "| Quantity    : " + quantity + "\n"
-                + "| Price       : " + price + "\n"
-                + "--------------------------------------------------";
+//        return "Book Details:\n"
+//                + "--------------------------------------------------\n"
+//                + "| Field       | Value                            |\n"
+//                + "--------------------------------------------------\n"
+//                + "| Book ID     : " + bookId + "\n"
+//                + "| Title       : " + title + "\n"
+//                + "| Author      : " + author + "\n"
+//                + "| Publisher   : " + publisher + "\n"
+//                + "| Year        : " + year + "\n"
+//                + "| Genre       : " + genre + "\n"
+//                + "| Quantity    : " + quantity + "\n"
+//                + "| Price       : " + price + "\n"
+//                + "--------------------------------------------------";
+        
+        return String.format(
+            "%-10s | %-20s | %-15s | %-15s | %-4d | %-10s | %-8d | %-8.2f",
+            bookId, title, author, publisher, year, genre, quantity, price);
+        
     }
 }
