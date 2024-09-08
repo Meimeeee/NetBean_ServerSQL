@@ -56,7 +56,7 @@ public class Room {
 
     @Override
     public String toString() {
-        return String.format("| %-5s | %-10s | %10.2f | %-10s |", 
+        return String.format("| %-10d | %-20s | %-12.2f | %-10d |", 
             room_id, room_type, room_price, room_status);
     }
     

@@ -41,16 +41,24 @@ public class BookManager {
         String author = sc.nextLine();
         System.out.print("Enter Publisher: ");
         String publisher = sc.nextLine();
-        System.out.print("Enter year of publisher: ");
-        int year = sc.nextInt();
-        sc.nextLine();
+        
+        int year = Input.readInt("Enter year of publisher:");
+//        System.out.print("Enter year of publisher: ");
+//        int year = sc.nextInt();
+//        sc.nextLine();
+
         System.out.print("Enter Genre: ");
         String genre = sc.nextLine();
-        System.out.print("Enter quantity: ");
-        int quantity = sc.nextInt();
-        sc.nextLine();
-        System.out.print("Enter price: ");
-        float price = sc.nextFloat();
+        
+        int quantity = Input.readInt("Enter quantity: ");
+//        System.out.print("Enter quantity: ");
+//        int quantity = sc.nextInt();
+//        sc.nextLine();
+        
+        float price = Input.readFloat("Enter price: ");
+//        System.out.print("Enter price: ");
+//        float price = sc.nextFloat();
+        
         return new Book(id, title, author, publisher, year, genre, quantity, price);
     }
 

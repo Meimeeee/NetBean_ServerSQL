@@ -7,7 +7,6 @@ package JDBC;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -15,7 +14,7 @@ import java.sql.SQLException;
  * @author ngoct
  */
 public class Connect {
-    private static Connect connection;
+    private static Connection connection;
     
     public static void init() throws SQLException{
         String hostName = "localhost";
@@ -27,10 +26,11 @@ public class Connect {
                 + ";trustServerCertificate=true";
         
         Connection connection = DriverManager.getConnection(url, userName, password);
+        Connect.connection = connection;
         System.out.println("Connect successfully!!!");
     }
     
-    public static Connect getConnection(){
+    public static Connection getConnection(){
         return connection;
     }
 

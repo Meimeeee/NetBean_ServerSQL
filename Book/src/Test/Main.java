@@ -22,8 +22,8 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         BookManager bookManager = BookManager.getInstance();
 
-        try {
-            while (true) {
+        while (true) {
+            try {
                 System.out.println();
                 System.out.println("+-------------------------------+");
                 System.out.println("|     Book Management Menu      |");
@@ -124,30 +124,30 @@ public class Main {
 //                            }
 //                        }
 //                        break;
-                        
                     case 5: // search
                         bookManager.randomSearch();
-                        break; 
+                        break;
 
                     case 6://show book by ID
                         bookManager.showBookByID();
                         break;
-                        
+
                     case 7://show total book
                         bookManager.totalBookCount();
                         break;
-                        
+
                     case 0://Exit
                         System.out.println("Baibaiii");
                         System.exit(0);
                         break;
                     default:
                         System.out.println("Invalid choice. Please try again.");
+
                 }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Try again!!!");
+                sc.nextLine();
             }
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Try again!!!");
-            sc.nextLine();
         }
     }
 }
