@@ -69,6 +69,8 @@ public class RoomManagement {
         int count = ps.executeUpdate();
         if (count > 0) {
             System.out.println("Update SUCCESSFULLY!!!!");
+            System.out.println("***___***___***___**___***___***___**___***___***___**___***___***___**___***___***___**___***___***___");
+            showAllRoom();
         } else {
             System.out.println("Update FAILEDDDDDDD");
         }
@@ -85,6 +87,8 @@ public class RoomManagement {
         int count = ps.executeUpdate();
         if (count > 0) {
             System.out.println("Remove SUCCESSFULLy!!!");
+            System.out.println("***___***___***___**___***___***___**___***___***___**___***___***___**___***___***___**___***___***___");
+            showAllRoom();
         } else {
             System.out.println("Remove FAILEDDDDDDD");
         }

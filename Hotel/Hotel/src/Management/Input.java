@@ -28,6 +28,7 @@ public class Input {
                 return sc.nextInt();
             } catch (Exception e) {
                 System.out.println("Wrong input format. It must be (int) !!!");
+            } finally{
                 sc.nextLine();
             }
         }
@@ -39,6 +40,7 @@ public class Input {
                 return sc.nextInt();
             } catch (Exception e) {
                 System.out.println("Wrong input format. It must be (int) !!!");
+            } finally {
                 sc.nextLine();
             }
         }
@@ -51,6 +53,7 @@ public class Input {
                 return sc.nextLong();
             } catch (Exception e) {
                 System.out.println("Wrong input format. It must be (long) type !!!");
+            } finally{
                 sc.nextLine();
             }
         }
@@ -63,6 +66,7 @@ public class Input {
                 return sc.nextDouble();
             } catch (Exception e) {
                 System.out.println("Wrong input format. It must be (double) type !!!");
+            } finally {
                 sc.nextLine();
             }
         }
@@ -115,7 +119,11 @@ public class Input {
         while (true) {
             try {
                 System.out.println(question);
-                return sc.nextLine();
+                String input = sc.nextLine();
+                if(input.isEmpty()){
+                    System.out.println("Input again !!");
+                    continue;
+                }
             } catch (Exception e) {
                 System.out.println("Wrong input format. It must be (Sring) !!!");
             }
@@ -127,10 +135,10 @@ public class Input {
         DateTimeFormatter dateFormat1 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         DateTimeFormatter dateFormat2 = DateTimeFormatter.ofPattern("MM-dd-yyyy");
         while (true) {
+            System.out.println(question);
             String dateInput = sc.nextLine();
 
             try {
-                System.out.println(question);
                 return LocalDate.parse(dateInput, dateFormat1);
             } catch (DateTimeParseException e1) {
                 try {

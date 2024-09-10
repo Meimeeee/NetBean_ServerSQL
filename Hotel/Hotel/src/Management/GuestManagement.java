@@ -67,7 +67,6 @@ public class GuestManagement {
     public Guest inputGuest() {
         int id = Input.readInt("Enter ID: ");
         String name = Input.readString("Enter name: ");
-        sc.nextLine();
         String mail = Input.readEmail("Enter mail: ");
         String phone = Input.inputPhonNumber("Enter phone number: ");
 
