@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,9 +19,7 @@ import java.util.Scanner;
  * @author ngoct
  */
 public class RoomManagement {
-
     public static RoomManagement instance;
-
     public static RoomManagement getInstance() {
         if (instance == null) {
             instance = new RoomManagement();
@@ -31,28 +28,17 @@ public class RoomManagement {
     }
 
     String table = "| %-10s | %-20s | %-13s | %-13s |%n";
-    
+    private final static Scanner sc = new Scanner(System.in);
+
     //1. add
-    public static Room inputRoom() {
-        Scanner sc = new Scanner(System.in);
+    public Room inputRoom() {
+        int id = Input.readInt("ID: ");
+        System.out.println("Type: ");
+        String type = sc.nextLine();
+        double price = Input.readDouble("Price: ");
+        int status = Input.readInt("Status: ");
 
-        try {
-            System.out.print("ID: ");
-            int id = sc.nextInt();
-            sc.nextLine();
-            System.out.print("Type: ");
-            String type = sc.nextLine();
-            System.out.print("Price: ");
-            double price = sc.nextDouble();
-            System.out.print("Status: ");
-            int status = sc.nextInt();
-        
-        return new Room(id, type, price, id);
-        } catch (InputMismatchException e) {
-            System.out.println("Wrong Input!! Please try again.");
-        }
-
-        
+        return new Room(id, type, price, status);
     }
 
     public void insertRoom(Room room) throws SQLException {
@@ -63,8 +49,8 @@ public class RoomManagement {
         ps.setDouble(3, room.getRoom_price());
         ps.setInt(4, room.getRoom_status());
 
-        int rowAffected = ps.executeUpdate();
-        if (rowAffected > 0) {
+        int count = ps.executeUpdate();
+        if (count > 0) {
             System.out.println("Insert Successfully!!");
         } else {
             System.out.println("Insert FAILED!!!!!!!!");
@@ -74,15 +60,14 @@ public class RoomManagement {
     //2. Update
     public void updateRoom() throws SQLException {
         Connection connection = JDBC.Connect.getConnection();
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter Status: ");
-        int status = sc.nextInt();
-
-        PreparedStatement ps = connection.prepareStatement("UPDATE rooms SET status = ?");
+        PreparedStatement ps = connection.prepareStatement("UPDATE rooms SET status = ? WHERE id = ?");
+        int id = Input.readInt("Enter Room ID: ");
+        int status = Input.readInt("Enter status: ");
         ps.setInt(1, status);
+        ps.setInt(2, id);
 
-        int rowAffected = ps.executeUpdate();
-        if (rowAffected > 0) {
+        int count = ps.executeUpdate();
+        if (count > 0) {
             System.out.println("Update SUCCESSFULLY!!!!");
         } else {
             System.out.println("Update FAILEDDDDDDD");
@@ -92,15 +77,13 @@ public class RoomManagement {
     //3. remove
     public void removeRoom() throws SQLException {
         Connection connection = JDBC.Connect.getConnection();
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter id room: ");
-        int id = sc.nextInt();
+        int id = Input.readInt("Enter room ID: ");
 
         PreparedStatement ps = connection.prepareStatement("DELETE FROM rooms WHERE id = ?");
         ps.setInt(1, id);
 
-        int rowAffected = ps.executeUpdate();
-        if (rowAffected > 0) {
+        int count = ps.executeUpdate();
+        if (count > 0) {
             System.out.println("Remove SUCCESSFULLy!!!");
         } else {
             System.out.println("Remove FAILEDDDDDDD");
@@ -108,11 +91,9 @@ public class RoomManagement {
     }
 
     //4. Find room by id
-    public void getRoom() throws SQLException {
+    public void getRoomByID() throws SQLException {
         Connection connection = Connect.getConnection();
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter ID room: ");
-        int id = sc.nextInt();
+        int id = Input.readInt("Enter room ID: ");
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM rooms WHERE id = ?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
@@ -121,20 +102,18 @@ public class RoomManagement {
         while (rs.next()) {
             found = true;
             printHeader();
-            System.out.format(table, "Room ID", "Room Type", "Room Price", "Room Status");
+            String roomStatus = (rs.getInt("status") <= 0) ? "FULL" : "AVAILABLE";
             System.out.printf(table,
                     rs.getInt("id"),
                     rs.getString("type"),
                     rs.getDouble("price"),
-                    rs.getInt("status")
+                    roomStatus
             );
             printFooter();
-
         }
         if (!found) {
             System.out.println("NOT FOUND !!!");
         }
-
     }
 
     //5. Show all
@@ -158,17 +137,14 @@ public class RoomManagement {
 
     public void showAllRoom() throws SQLException {
         List<Room> rooms = listRoom();
-        
-
         if (!rooms.isEmpty()) {
 
             printHeader();
             for (Room room : rooms) {
-                String roomStatus = (room.getRoom_status() == 0) ? "FULL" : "AVAILABLE";
+                String roomStatus = (room.getRoom_status() <= 0) ? "FULL" : "AVAILABLE";
                 System.out.printf(table, room.getRoom_id(), room.getRoom_type(), room.getRoom_price(), roomStatus);
                 printFooter();
             }
-
         } else {
             System.out.println("EMPTY !!!!!!!");
         }
@@ -179,7 +155,6 @@ public class RoomManagement {
         System.out.println("| Room ID    | Room Type            | Room Price    | Room Status   |");
         System.out.println("+------------+----------------------+---------------+---------------+");
     }
-
     private void printFooter() {
         System.out.println("+------------+----------------------+---------------+---------------+");
     }

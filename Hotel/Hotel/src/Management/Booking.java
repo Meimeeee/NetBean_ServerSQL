@@ -68,7 +68,7 @@ public class Booking {
 
     @Override
     public String toString() {
-        return String.format("| %-8s | %-8s | %-8s | %-12s | %-12s |",
+        return String.format("| %-10s | %-10s | %-10s | %-12s | %-12s |",
             booking_id, room_id, guest_id, check_in, check_out);
     }
     

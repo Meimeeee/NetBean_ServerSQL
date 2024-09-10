@@ -13,9 +13,9 @@ public class Guest {
     private int guest_id;
     private String guest_name;
     private String guest_email;
-    private long guest_phone;
+    private String guest_phone;
 
-    public Guest(int guest_id, String guest_name, String guest_email, long guest_phone) {
+    public Guest(int guest_id, String guest_name, String guest_email, String guest_phone) {
         this.guest_id = guest_id;
         this.guest_name = guest_name;
         this.guest_email = guest_email;
@@ -46,17 +46,17 @@ public class Guest {
         this.guest_email = guest_email;
     }
 
-    public long getGuest_phone() {
+    public String getGuest_phone() {
         return guest_phone;
     }
 
-    public void setGuest_phone(long guest_phone) {
+    public void setGuest_phone(String guest_phone) {
         this.guest_phone = guest_phone;
     }
 
     @Override
     public String toString() {
-        return String.format("| %-5s | %-20s | %-15s |", 
+        return String.format("| %-15s | %-20s | %-30s | %-15s |", 
             guest_id, guest_name, guest_email, guest_phone);
         
     }

@@ -5,6 +5,8 @@
  */
 package Test;
 
+import Management.Guest;
+import Management.GuestManagement;
 import Management.Room;
 import Management.RoomManagement;
 import java.sql.SQLException;
@@ -16,9 +18,7 @@ import java.util.Scanner;
  * @author ngoct
  */
 public class Menu {
-
     public static Menu instance;
-
     public static Menu getinstance() {
         if (instance == null) {
             instance = new Menu();
@@ -26,12 +26,11 @@ public class Menu {
         return instance;
     }
 
-    Scanner sc = new Scanner(System.in);
+    private final static Scanner sc = new Scanner(System.in);
     RoomManagement rm = RoomManagement.getInstance();
-
+    GuestManagement gm = GuestManagement.getInstance();
+    
     public void RoomMenu() throws SQLException {
-        int room = 0;
-
         while (true) {
             try {
                 System.out.println("+-------------------------------------+");
@@ -42,10 +41,10 @@ public class Menu {
                 System.out.println("| 3. Delete Room                      |");
                 System.out.println("| 4. Find Room                        |");
                 System.out.println("| 5. View Room List                   |");
-                System.out.println("| 0. Exit                             |");
+                System.out.println("| 0. Back to Management               |");
                 System.out.println("+-------------------------------------+");
                 System.out.print("Choose an option: ");
-                room = sc.nextInt();
+                int room = sc.nextInt();
                 sc.nextLine();
 
                 switch (room) {
@@ -62,7 +61,7 @@ public class Menu {
                         rm.removeRoom();
                         break;
                     case 4://find
-                        rm.getRoom();
+                        rm.getRoomByID();
                         break;
 
                     case 5://show all
@@ -71,7 +70,9 @@ public class Menu {
 
                     case 0://exit
                         System.out.println("See youu !!");
-                        System.exit(0);
+                        return;
+                    default:
+                        System.out.println("Only 0..5");
                         break;
                 }
 
@@ -80,6 +81,68 @@ public class Menu {
                 sc.nextLine();
             }
         }
+        
+    
+    
+    
+    
+    
+    
+    
+}
 
+    public void GuestMenu() throws SQLException{
+        while (true){
+        try {
+            System.out.println("+--------------------------------------+");
+            System.out.println("|           GUEST MANAGEMENT           |");
+            System.out.println("+--------------------------------------+");
+            System.out.println("| 1. Add New Guest                     |");
+            System.out.println("| 2. Update Guest                      |");
+            System.out.println("| 3. Delete Guest                      |");
+            System.out.println("| 4. Find Guest                        |");
+            System.out.println("| 5. View Guest List                   |");
+            System.out.println("| 0. Back to Management                |");
+            System.out.println("+--------------------------------------+");
+            System.out.print("Choose an option: ");
+            int guest = sc.nextInt();
+            sc.nextLine();
+            
+            switch(guest){
+                case 1://add
+                    Guest g = gm.inputGuest();
+                    gm.insertGuest(g);
+                    break;
+                    
+                case 2://update
+                    gm.updateGuest();
+                    break;
+                    
+                case 3://delete
+                    gm.removeGuest();
+                    break;
+                    
+                case 4://find
+                    gm.getGuestByID();
+                    break;
+                    
+                case 5://view
+                    gm.showAllGuest();
+                    break;
+                    
+                case 0://exit
+                    System.out.println("Baii baii");
+                    return;
+                default:
+                    System.out.println("Only 1..5");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Wrong input !!!");
+        }
+    }
+    }
+    
+    public void BookingMenu(){
+        
     }
 }
