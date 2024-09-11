@@ -164,18 +164,65 @@ public class Menu {
                         break;
                         
                     case 2://update
+                        while(true){
+                            try {
+                                System.out.println("+-------------------------------------+");
+                                System.out.println("|            UPDATE BOOKING           |");
+                                System.out.println("+-------------------------------------+");
+                                System.out.println("| 1. Update Room                      |");
+                                System.out.println("| 2. Update check_in date             |");
+                                System.out.println("| 0. Exit                             |");
+                                System.out.println("+-------------------------------------+");
+                                System.out.print("Choose an option: ");
+                                    int update = sc.nextInt();
+                                    sc.nextLine();
+                                switch(update){
+                                    case 1://update room
+                                        bm.updateRoom();
+                                        break;
+                                        
+                                    case 2://update check_in date
+                                        bm.updateCheckInDate();
+                                        break;
+                                        
+                                    case 0://exit
+                                        System.out.println("Baii");
+                                        return;
+                                        
+                                    default:
+                                        System.out.println("Input 1, 2 and 0 for exit");
+                                        break;
+                                }
+                            } catch (SQLException e) {
+                                System.out.println("Database error: " + e.getMessage());
+                                sc.nextLine();
+                            }
+                        }
+                        break;
+                        
                     case 3://delete
+                        bm.Delete();
+                        break;
+                        
                     case 4://find by id_booking
+                        bm.findBooking();
+                        break;
+                        
                     case 5://show all
+                        bm.showAll();
+                        break;
+                        
                     case 0://exit
                         System.out.println("Bai baii");
                         break;
+                        
                     default:
                         System.out.println("Wrong input. Enter 1..5 and 0 to exit");
                         break;
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Wrong input !!!");
+                sc.nextLine();
             }
         }
     }

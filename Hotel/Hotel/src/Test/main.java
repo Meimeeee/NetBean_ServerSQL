@@ -51,10 +51,13 @@ public class main {
                         
                     case 3:
                         menu.BookingMenu();
+                        break;
+                        
                     case 0:
                         System.out.println("See you !!");
                         System.exit(0);
                         break;
+                        
                     default:
                         System.out.println("Only 0..3");
                         break;

@@ -83,7 +83,9 @@ public class GuestManagement {
 
         int count = ps.executeUpdate();
         if (count > 0) {
-            System.out.println("Insert SUCCESFULLY !!");
+            System.out.println("Add SUCCESFULLY !!");
+            System.out.println("***___***___***___**___***___***___**___***___***___**___***___***___**___***___***___**___***___***___");
+            showAllGuest();
         } else {
             System.out.println("Insert FAILED !!!!!");
         }

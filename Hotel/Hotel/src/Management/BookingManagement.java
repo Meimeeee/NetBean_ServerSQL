@@ -82,6 +82,8 @@ public class BookingManagement {
         int count = ps.executeUpdate();
         if (count > 0) {
             System.out.println("Add SUCCESSFULLY !!");
+            System.out.println("***___***___***___**___***___***___**___***___***___**___***___***___**___***___***___**___***___***___");
+            showAll();
         } else {
             System.out.println("FAILED !!!");
         }
@@ -132,6 +134,8 @@ public class BookingManagement {
             System.out.println("UPDATE SUCCESSFULLY");
             System.out.println("***___***___***___**___***___***___**___***___***___**___***___***___**___***___***___**___***___***___");
             showAll();
+        } else {
+            System.out.println("UPDATE FAILED !!");
         }
 
     }
@@ -159,13 +163,24 @@ public class BookingManagement {
         int id = Input.readInt("Enter ID Booking: ");
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM bookings WHERE id = ?");
         ps.setInt(1, id);
-
-        int count = ps.executeUpdate();
-        if (count > 0) {
-            System.out.println("DELETE SUCCESSFULLY !!");
-            showAll();
-        } else {
-            System.out.println("FAILED !!!");
+        ResultSet rs = ps.executeQuery();
+        boolean found = false;
+        while (rs.next()) {
+            found = true;
+            LocalDate check_in = rs.getDate("check_in").toLocalDate();
+            LocalDate check_out = rs.getDate("check_out").toLocalDate();
+            printHeader();
+            System.out.format(table,
+                    rs.getInt("id"),
+                    rs.getInt("room_id"),
+                    rs.getInt("guest_id"),
+                    check_in,
+                    check_out
+            );
+            printFooter();
+            if (!found) {
+                System.out.println("NOT FOUND !!");
+            }
         }
     }
 
@@ -190,6 +205,7 @@ public class BookingManagement {
         }
         return bookings;
     }
+
     public void showAll() throws SQLException {
         List<Booking> bookings = listBooking();
         if (!bookings.isEmpty()) {
@@ -217,16 +233,15 @@ public class BookingManagement {
                     return id;
                 } else {
                     System.out.println("ID not exist. Try again !!");
-                    sc.nextLine();
+                    
                 }
             } catch (SQLException e) {
                 System.out.println("Database Error !!!" + e.getMessage());
+                sc.nextLine();
             } catch (Exception e) {
                 System.out.println("Invalid input!!");
-            } finally {
                 sc.nextLine();
             }
-
         }
     }
 
