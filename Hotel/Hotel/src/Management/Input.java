@@ -122,6 +122,7 @@ public class Input {
                     System.out.println("Input again !!");
                     continue;
                 }
+                return input;
             } catch (Exception e) {
                 System.out.println("Wrong input format. It must be (Sring) !!!");
             }

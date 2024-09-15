@@ -96,7 +96,6 @@ public class GuestManagement {
         Connection connection = JDBC.Connect.getConnection();
         PreparedStatement ps = connection.prepareStatement("UPDATE guests SET phone = ? WHERE id = ?");
         int id = Input.readInt("Enter guest ID: "); 
-        sc.nextLine();
         String phone = Input.inputPhonNumber("New Phone:");
         ps.setString(1, phone);
         ps.setInt(2, id);

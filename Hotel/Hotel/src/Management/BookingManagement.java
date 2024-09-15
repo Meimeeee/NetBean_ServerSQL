@@ -72,7 +72,8 @@ public class BookingManagement {
 
     public void insertBooking(Booking b) throws SQLException {
         Connection connection = JDBC.Connect.getConnection();
-        PreparedStatement ps = connection.prepareStatement("INSERT INTO bookings(id, room_id, guest_id, check_in, check_out) VALUES (?, ?, ?, ?, ?)");
+        try {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO bookings(id, room_id, guest_id, check_in, check_out) VALUES (?, ?, ?, ?, ?)");
         ps.setInt(1, b.getBooking_id());
         ps.setInt(2, b.getRoom_id());
         ps.setInt(3, b.getGuest_id());
@@ -86,6 +87,9 @@ public class BookingManagement {
             showAll();
         } else {
             System.out.println("FAILED !!!");
+        }
+        } catch (SQLException e) {
+            System.out.println("SQL error: " + e.getMessage());
         }
     }
 
@@ -120,9 +124,9 @@ public class BookingManagement {
 
     public void updateRoom() throws SQLException {
         Connection connection = JDBC.Connect.getConnection();
+        int bookingID = Input.readInt("Enter Booking ID: ");
         int roomID = checkID("rooms");
         int guestID = checkID("guests");
-        int bookingID = Input.readInt("Enter Booking ID: ");
 
         int newRoom = Input.readInt("Enter new room ID: ");
         PreparedStatement ps = connection.prepareStatement("UPDATE bookings SET room_id = ? WHERE id = ?");
@@ -193,7 +197,7 @@ public class BookingManagement {
 
         while (rs.next()) {
             LocalDate check_in = rs.getDate("check_in").toLocalDate();
-            LocalDate check_out = rs.getDate("ccheck_out").toLocalDate();
+            LocalDate check_out = rs.getDate("check_out").toLocalDate();
             Booking b = new Booking(
                     rs.getInt("id"),
                     rs.getInt("room_id"),

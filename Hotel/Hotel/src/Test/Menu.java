@@ -141,7 +141,8 @@ public class Menu {
     }
 
     public void BookingMenu() throws SQLException {
-        while(true){
+        boolean quit = false;
+        while(!quit){
             try {
                 System.out.println("+----------------------------------------+");
                 System.out.println("|           BOOKING MANAGEMENT           |");
@@ -164,7 +165,8 @@ public class Menu {
                         break;
                         
                     case 2://update
-                        while(true){
+                        boolean isQuit = false;
+                        while(!isQuit){
                             try {
                                 System.out.println("+-------------------------------------+");
                                 System.out.println("|            UPDATE BOOKING           |");
@@ -187,12 +189,13 @@ public class Menu {
                                         
                                     case 0://exit
                                         System.out.println("Baii");
-                                        return;
+                                        isQuit = true;
                                         
                                     default:
                                         System.out.println("Input 1, 2 and 0 for exit");
                                         break;
                                 }
+                                
                             } catch (SQLException e) {
                                 System.out.println("Database error: " + e.getMessage());
                                 sc.nextLine();
@@ -214,6 +217,7 @@ public class Menu {
                         
                     case 0://exit
                         System.out.println("Bai baii");
+                        quit = true;
                         break;
                         
                     default:
