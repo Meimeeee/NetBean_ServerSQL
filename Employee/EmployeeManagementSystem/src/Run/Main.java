@@ -19,6 +19,8 @@ public class Main {
         Management.Employee e = new Employee(1, "bdd", "SD1", 23);
         System.out.println(e);
         Management.Department d = new Department("saf1", "DFBSSbtesbsz");
+        System.out.println("+------------+----------------------+");
+
         System.out.println(d);
     }
 }

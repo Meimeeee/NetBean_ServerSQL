@@ -14,22 +14,23 @@ import java.sql.SQLException;
  * @author ngoct
  */
 public class Connect {
-    public static Connect connection;
+    public static Connection connection;
+    
     public static void init() throws SQLException{
-        String hostname = "localhost";
-        String SQLname = "Employee";
+        String hostName = "localhost";
+        String SQL = "Employee";
         String user = "sa";
         String password = "12345";
-        String url = "jdbc:sqlserver://" + hostname
-                + ";databaseName=" + SQLname
+        String url = "jdbc:sqlserver://" + hostName
+                + ";databaseName=" + SQL
                 + ";trustServerCertificate=true";
         
         Connection connection = DriverManager.getConnection(url, user, password);
-        Connect.connection = Connect.connection;
-        System.out.println("Connec successfully !!!!!! >__<");
+        Connect.connection = connection;
+        System.out.println("Connect successfully !!");
     }
     
-    public static Connect getConnect(){
+    public static Connection getConnection(){
         return connection;
     }
 }
