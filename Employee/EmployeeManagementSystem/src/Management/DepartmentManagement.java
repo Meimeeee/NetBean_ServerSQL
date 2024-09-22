@@ -31,7 +31,7 @@ public class DepartmentManagement {
         return instance;
     }
 
-    String table = "| %-10s | %-20s |";
+    String table = "| %-10s | %-20s |\n";
 
     //1.View all
     public List<Department> listDepartment() throws SQLException {
@@ -49,8 +49,8 @@ public class DepartmentManagement {
     }
     public void showAll() {
         List<Department> departments = new ArrayList<>();
-        printHeader();
         if (!departments.isEmpty()) {
+            printHeader();
             for (Department department : departments) {
                 System.out.println(department);
                 printFooter();
@@ -66,6 +66,7 @@ public class DepartmentManagement {
         String name = Input.readString("Enter Department Name: ");
         return new Department(id, name);
     }
+
     public void addDepartment(Department d) throws SQLException {
         try {
             Connection connection = JDBC.Connect.getConnection();
@@ -75,29 +76,64 @@ public class DepartmentManagement {
             int count = ps.executeUpdate();
             if (count > 0) {
                 System.out.println("ADD SUCCESSFULLY !!");
+                showAll();
             } else {
                 System.out.println("Failed !!!");
             }
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
- 
+
     }
 
     //3.Find
-    public void findById(){
+    public void findById() {
         try {
             Connection connection = JDBC.Connect.getConnection();
-            PreparedStatement ps = connection.prepareStatement("");
+            String id = Input.readString("Enter Department ID: ");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM department WHERE id = ?");
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            boolean exist = false;
+            while (rs.next()) {
+                exist = true;
+                printHeader();
+                System.out.format(table, rs.getString("id"),
+                        rs.getString("name")
+                );
+                printFooter();
+            }
+            if (!exist) {
+                System.out.println("NOT FOUND !!!");
+            }
         } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    //4.Remove
+    public void remvoveDepartment() throws SQLException {
+        Connection connection = JDBC.Connect.getConnection();
+        PreparedStatement ps = connection.prepareStatement("DELETE FROM department WHERE id = ?");
+        ps.setString(1, "id");
+        int count = ps.executeUpdate();
+        
+        if(count>0){
+            System.out.println("DELETED !!");
+            showAll();
+        } else {
+            System.out.println("FAILED !!");
         }
     }
     
+
     void printHeader() {
-        System.out.println("+------------+----------------------+");
+        System.out.println("+------------+----------------------+\n");
+        System.out.format("| %-10s | %-20s |\n", "ID", "Name");
     }
+
     void printFooter() {
-        System.out.println("+-----------------------------------+");
+        System.out.println("+------------+----------------------+\n");
     }
 
 }

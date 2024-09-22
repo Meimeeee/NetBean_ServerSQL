@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Input {
     private static Scanner sc = new Scanner(System.in);
     
-    public static int readInt(String question){
+    public static int readInt(String question){ //đọc lỗi nhập không theo format
         while(true){
             try {
                 System.out.println(question);

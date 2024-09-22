@@ -6,6 +6,7 @@
 package Run;
 
 import Management.Department;
+import Management.DepartmentManagement;
 import Management.Employee;
 import java.sql.SQLException;
 
@@ -18,9 +19,13 @@ public class Main {
         JDBC.Connect.init();
         Management.Employee e = new Employee(1, "bdd", "SD1", 23);
         System.out.println(e);
+        System.out.println("");
         Management.Department d = new Department("saf1", "DFBSSbtesbsz");
         System.out.println("+------------+----------------------+");
 
         System.out.println(d);
+        
+        Management.DepartmentManagement dm = DepartmentManagement.getInstance();
+        dm.findById();
     }
 }

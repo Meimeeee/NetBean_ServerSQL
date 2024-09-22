@@ -56,7 +56,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return String.format("| %-10d | %-20s | %-10s | %-10.2f |", employeeId,employeeName,departmentId,salary);
+        return String.format("| %-10d | %-20s | %-10s | %-10.2f |\n", employeeId,employeeName,departmentId,salary);
     }
     
     
