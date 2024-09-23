@@ -90,6 +90,7 @@ public class EmployeeManagement {
             int count = ps.executeUpdate();
             if (count > 0) {
                 System.out.println("Add Successfully !!");
+                System.out.println("***___***___***___**___***___***___**___***___***___**___***___***___**___***___***___**___***___***___");
                 ShowAll();
             } else {
                 System.out.println("Failed !!");
@@ -122,7 +123,32 @@ public class EmployeeManagement {
         if (!exist) {
             System.out.println("NOT FOUND !!");
         }
+    }
 
+    public void findEmployee(String tableName) {//name & id department
+        try {
+            Connection connection = JDBC.Connect.getConnection();
+            String choose = Input.readString("Enter: ");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM employee WHERE " + tableName + " = ?");
+            ps.setString(1, choose);
+            ResultSet rs = ps.executeQuery();
+            int count = ps.executeUpdate();
+            if (count > 0) {
+                printHeader();
+                while (rs.next()) {
+                    System.out.format(table, rs.getInt("id"),
+                            rs.getString("name"),
+                            rs.getString("id_department"),
+                            rs.getDouble("salary")
+                    );
+                    printFooter();
+                }
+            } else {
+                System.out.println("NOT fOUND !!!");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     //4.update
@@ -137,6 +163,7 @@ public class EmployeeManagement {
             int count = ps.executeUpdate();
             if (count > 0) {
                 System.out.println("Update Successfully !!");
+                System.out.println("***___***___***___**___***___***___**___***___***___**___***___***___**___***___***___**___***___***___");
                 ShowAll();
             } else {
                 System.out.println("failed");
@@ -156,7 +183,8 @@ public class EmployeeManagement {
 
             int count = ps.executeUpdate();
             if (count > 0) {
-                System.out.println("Delated !!");
+                System.out.println("Deleted !!");
+                System.out.println("***___***___***___**___***___***___**___***___***___**___***___***___**___***___***___**___***___***___");
                 ShowAll();
             } else {
                 System.out.println("failed !!!");
@@ -167,13 +195,13 @@ public class EmployeeManagement {
     }
 
     private void printHeader() {
-        System.out.println("+------------+----------------------+------------+------------+\\;");
+        System.out.println("+------------+----------------------+------------+------------+");
         System.out.format("| %-10s | %-20s | %-17s | %-10s |\n", "Employee ID", "Name", "Department ID", "Salary");
-        System.out.println("+------------+----------------------+------------+------------+\\;");
+        System.out.println("+------------+----------------------+------------+------------+");
     }
 
     private void printFooter() {
-        System.out.println("+------------+----------------------+------------+------------+\\;");
+        System.out.println("+------------+----------------------+------------+------------+");
     }
 
     private boolean isEmployeeExist(int id) throws SQLException {

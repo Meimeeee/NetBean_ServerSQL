@@ -94,16 +94,13 @@ public class DepartmentManagement {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM department WHERE id = ?");
             ps.setString(1, id);
             ResultSet rs = ps.executeQuery();
-            boolean exist = false;
-            while (rs.next()) {
-                exist = true;
+            if (rs.next()) {
                 printHeader();
                 System.out.format(table, rs.getString("id"),
                         rs.getString("name")
                 );
                 printFooter();
-            }
-            if (!exist) {
+            } else {
                 System.out.println("NOT FOUND !!!");
             }
         } catch (SQLException e) {
